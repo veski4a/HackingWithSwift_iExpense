@@ -7,10 +7,26 @@
 
 import SwiftUI
 
+struct SecondView: View{
+    @Environment(\.presentationMode) private var presentationMode
+    
+    var body: some View{
+        Button("Dismiss"){
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
+
 struct ContentView: View {
+    @State private var showingSheet = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Button("Show sheet"){
+            showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet){
+            SecondView()
+        }
     }
 }
 
